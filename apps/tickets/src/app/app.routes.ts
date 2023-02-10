@@ -1,3 +1,4 @@
+import { loadRemoteModule } from '@angular-architects/module-federation';
 import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
 import { ConfigService } from '@flight-demo/shared/util-config';
@@ -15,7 +16,15 @@ export const APP_ROUTES: Routes = [
     path: 'home',
     component: HomeComponent,
   },
-
+  {
+    path: 'checkin',
+    loadComponent: () =>
+      loadRemoteModule({
+        type: 'module',
+        remoteEntry: 'http://localhost:4201/remoteEntry.js',
+        exposedModule: './Component',
+      }),
+  },
   {
     path: '',
     resolve: {
