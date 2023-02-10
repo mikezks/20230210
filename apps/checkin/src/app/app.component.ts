@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ManageComponent } from '@flight-demo/checkin/feature-manage';
 
 @Component({
@@ -10,5 +10,6 @@ import { ManageComponent } from '@flight-demo/checkin/feature-manage';
   styleUrls: ['./app.component.scss'],
 })
 export default class AppComponent {
+  @Input() name = 'string';
   title = 'checkin';
 }

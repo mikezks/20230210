@@ -1,6 +1,16 @@
-import { Component, inject, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  inject,
+  Type,
+  ViewContainerRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { loadRemoteModule } from '@angular-architects/module-federation';
+
+function injectPlaceholder(): ViewContainerRef {
+  return inject(ViewContainerRef);
+}
 
 @Component({
   selector: 'app-home',
@@ -10,13 +20,21 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  #vc = inject(ViewContainerRef);
+  #vc = injectPlaceholder();
+  comp?: ComponentRef<unknown>;
 
   loadMfe(): void {
     loadRemoteModule({
       type: 'module',
       remoteEntry: 'http://localhost:4201/remoteEntry.js',
       exposedModule: './Component',
-    }).then((esm) => this.#vc.createComponent(esm.default));
+    }).then((esm) => {
+      this.comp = this.#vc.createComponent(esm.default);
+      this.changeName('Michael');
+    });
+  }
+
+  changeName(name: string): void {
+    this.comp?.setInput('name', name);
   }
 }
