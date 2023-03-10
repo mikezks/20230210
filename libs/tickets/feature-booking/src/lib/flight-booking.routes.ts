@@ -1,8 +1,12 @@
+import { CheckinComponent } from '@flight-demo/luggage/feature-checkin';
 import { Routes } from '@angular/router';
 import { FlightBookingComponent } from './flight-booking.component';
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
 import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { PassengerSearchComponent } from './passenger-search/passenger-search.component';
+
+CheckinComponent
+// nx lint tickets-feature-booking
 
 export const FLIGHT_BOOKING_ROUTES: Routes = [
   {
